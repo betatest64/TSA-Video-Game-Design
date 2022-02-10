@@ -1,9 +1,14 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://assets/Rectangle-Rectangular-Green-Bar-Horizontal-31174.png" type="Texture" id=1]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://DemoLevel.gd" type="Script" id=3]
 [ext_resource path="res://Projectile.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Enemy.tscn" type="PackedScene" id=5]
+[ext_resource path="res://EnemyPath1.gd" type="Script" id=6]
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 1483.13, 154 )
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 181, 36.5 )
@@ -14,12 +19,18 @@ extents = Vector2( 180, 35 )
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 180.5, 35.5 )
 
-[sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 686.25, 154 )
+[sub_resource type="Curve2D" id=5]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 2400, 440, 0, 0, 0, 0, 2304, 440, 0, 0, 0, 0, 2304, 440, 0, 0, 0, 0, 2304, 440, 0, 0, 0, 0, 2280, 352, 0, 0, 0, 0, 2256, 296, 0, 0, 0, 0, 2240, 256, 0, 0, 0, 0, 2224, 216, 0, 0, 0, 0, 2216, 208, 0, 0, 0, 0, 2192, 192, 0, 0, 0, 0, 2168, 208, 0, 0, 0, 0, 2160, 224, 0, 0, 0, 0, 2152, 256, 0, 0, 0, 0, 1856, 256, 0, 0, 0, 0, 1832, 208, 0, 0, 0, 0, 1816, 184, 0, 0, 0, 0, 1800, 168, 0, 0, 0, 0, 1776, 160, 0, 0, 0, 0, 1744, 184, 0, 0, 0, 0, 1728, 216, 0, 0, 0, 0, 1712, 264, 0, 0, 0, 0, 1712, 296, 0, 0, 0, 0, 1712, 320, 0, 0, 0, 0, 1712, 360, 0, 0, 0, 0, 1408, 360, 0, 0, 0, 0, 1400, 328, 0, 0, 0, 0, 1384, 296, 0, 0, 0, 0, 1368, 272, 0, 0, 0, 0, 1352, 256, 0, 0, 0, 0, 1328, 248, 0, 0, 0, 0, 1296, 264, 0, 0, 0, 0, 1280, 304, 0, 0, 0, 0, 1272, 336, 0, 0, 0, 0, 1264, 368, 0, 0, 0, 0, 1256, 400, 0, 0, 0, 0, 1248, 424, 0, 0, 0, 0, 1248, 448, 0, 0, 0, 0, 1248, 464, 0, 0, 0, 0, 1024, 464, 0, 0, 0, 0, 1008, 376, 0, 0, 0, 0, 984, 312, 0, 0, 0, 0, 960, 264, 0, 0, 0, 0, 928, 208, 0, 0, 0, 0, 896, 184, 0, 0, 0, 0, 872, 176, 0, 0, 0, 0, 840, 192, 0, 0, 0, 0, 808, 224, 0, 0, 0, 0, 784, 264, 0, 0, 0, 0, 768, 304, 0, 0, 0, 0, 752, 360, 0, 0, 0, 0, 736, 464, 0, 0, 0, 0, 488, 464, 0, 0, 0, 0, 464, 392, 0, 0, 0, 0, 432, 336, 0, 0, 0, 0, 400, 296, 0, 0, 0, 0, 368, 280, 0, 0, 0, 0, 336, 296, 0, 0, 0, 0, 304, 336, 0, 0, 0, 0, 296, 368, 0, 0, 0, 0, 280, 416, 0, 0, 0, 0, 272, 440, 0, 0, 0, 0, 272, 440, 0, 0, 0, 0, 264, 464, 0, 0, 0, 0, 16, 464, 0, 0, 0, 0, 16, 464, 0, 0, 0, 0, 16, 464, 0, 0, 0, 0, 16, 464 )
+}
 
 [node name="DemoLevel" type="Area2D"]
 script = ExtResource( 3 )
 Projectile = ExtResource( 4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 1483.88, 724 )
+shape = SubResource( 4 )
 
 [node name="Ground1" type="StaticBody2D" parent="."]
 
@@ -45,6 +56,7 @@ position = Vector2( 656, 528 )
 shape = SubResource( 2 )
 
 [node name="Wall" type="StaticBody2D" parent="."]
+position = Vector2( 2, 18 )
 
 [node name="Sprite" type="Sprite" parent="Wall"]
 position = Vector2( 872, 450 )
@@ -57,9 +69,75 @@ position = Vector2( 873.5, 450 )
 rotation = 1.5708
 shape = SubResource( 3 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 687, 724 )
-shape = SubResource( 4 )
+[node name="Ground3" type="StaticBody2D" parent="."]
+position = Vector2( 1038, 0 )
+
+[node name="Sprite" type="Sprite" parent="Ground3"]
+position = Vector2( 135, 529 )
+scale = Vector2( 0.377083, 0.302083 )
+texture = ExtResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground3"]
+position = Vector2( 135, 527 )
+shape = SubResource( 1 )
+
+[node name="Ground4" type="StaticBody2D" parent="."]
+position = Vector2( 1391, -109 )
+
+[node name="Sprite" type="Sprite" parent="Ground4"]
+position = Vector2( 182, 531 )
+scale = Vector2( 0.377083, 0.302083 )
+texture = ExtResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground4"]
+position = Vector2( 181, 530.5 )
+shape = SubResource( 1 )
+
+[node name="Ground5" type="StaticBody2D" parent="."]
+position = Vector2( 1836, -207 )
+
+[node name="Sprite" type="Sprite" parent="Ground5"]
+position = Vector2( 182, 531 )
+scale = Vector2( 0.377083, 0.302083 )
+texture = ExtResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground5"]
+position = Vector2( 181, 530.5 )
+shape = SubResource( 1 )
+
+[node name="Ground6" type="StaticBody2D" parent="."]
+position = Vector2( 2272, -9 )
+
+[node name="Sprite" type="Sprite" parent="Ground6"]
+position = Vector2( 182, 531 )
+scale = Vector2( 0.377083, 0.302083 )
+texture = ExtResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground6"]
+position = Vector2( 181, 530.5 )
+shape = SubResource( 1 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( -191, -482 )
+position = Vector2( -235, -483 )
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2( 572, 415 )
+current = true
+zoom = Vector2( 1.5, 1.5 )
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource( 5 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="EnemyPath1" type="PathFollow2D" parent="Path2D"]
+position = Vector2( 2400, 440 )
+rotation = 3.14159
+rotate = false
+script = ExtResource( 6 )
+
+[node name="Enemy" parent="Path2D/EnemyPath1" instance=ExtResource( 5 )]
+position = Vector2( 0, 3.05176e-05 )
+
+[connection signal="fire_enemy_projectile" from="Path2D/EnemyPath1/Enemy" to="." method="_on_Enemy_fire_enemy_projectile"]
